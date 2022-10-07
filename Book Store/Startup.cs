@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Work_01
+namespace Book_Store
 {
     public class Startup
     {
@@ -39,8 +38,6 @@ namespace Work_01
             }
             app.UseStaticFiles();
 
-
-
             app.UseRouting();
 
             app.UseAuthorization();
@@ -53,4 +50,4 @@ namespace Work_01
             });
         }
     }
-    }
+}

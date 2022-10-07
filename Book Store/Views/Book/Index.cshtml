@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BookModel>
+
+@{
+    Layout = "_Layout";
+}
+
+
+<div class="container pt-2">
+     <hr class="my-4">
+    <div class="text-center">
+  <h1 class="display-4">All Books</h1>
+  <hr class="my-4">
+</div>
+</div>
+
+ <div class="container">
+         <div class="row">
+
+@foreach (var item in Model)
+{
+
+  
+    <div class="col-md-3  pt-3">
+        <div class="card mb-3 shadow-sm">
+      <img src="https://99designs-start-attachments.imgix.net/alchemy-pictures/2016%2F02%2F22%2F06%2F31%2F00%2F08c4c2bc-737b-454d-b3f7-0041110dd699%2F510245_Llywellyn.png?auto=format&ch=Width%2CDPR&w=500&h=500" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">@item.Title</h5>
+        <p class="card-text">@item.Description</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">@item.Author</small>
+      </div>
+      </div>
+    <a href="#" class="btn btn-primary">View Details</a>
+  </div>
+ }
+ </div>
+ </div>
