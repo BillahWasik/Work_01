@@ -16,5 +16,14 @@ namespace Book_Store.Controllers
             
             return View(data);
         }
+
+        public IActionResult BookDetails(int id)
+        {
+            var data = _db.searchbookbyid(id);
+
+            return View(data);
+        }
+
+
     }
 }
