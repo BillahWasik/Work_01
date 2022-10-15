@@ -1,9 +1,7 @@
-﻿@using Book_Store.Models;
-@model BookModel
+﻿@model BookModel
 
 @{
-    Layout = "_Layout";
-    
+    ViewData["Title"] = "Book Details";
 }
 
 <div class="container">
@@ -68,8 +66,9 @@
                    <li class="list-group-item"><span class="font-weight-bold">Total Pages - </span>@Model.TotalPages</li>
                    <li class="list-group-item"><span class="font-weight-bold">Language - </span>@Model.Language</li>
                </ul>
-              
            </div>
 
-        </div>
-    </div>
+            
+
+               </div>
+           </div>

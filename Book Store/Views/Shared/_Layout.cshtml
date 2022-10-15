@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Book_Store</title>
+    <title>@ViewData["Title"] | Book Store</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -22,6 +22,9 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" asp-controller="Book" asp-action="Index">All Books</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" asp-controller="Book" asp-action="Addnewbook">Add new Book</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

@@ -1,6 +1,10 @@
-﻿using Book_Store.Models;
+﻿using Book_Store.Data;
+using Book_Store.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System;
 
 namespace Book_Store.Repository
 {
@@ -24,18 +28,88 @@ namespace Book_Store.Repository
 
         }
 
-        public List<BookModel> getallbooks() 
+        public async Task <List<BookModel>>  getallbooks() 
         {
-            return bookModels();
+            var books = new List<BookModel>();
+
+            var data = await _db.Books.ToListAsync();
+
+            if (data?.Any() == true)
+            {
+                foreach (var item in data)
+                {
+                    books.Add(new BookModel()
+                    {
+                        Id = item.Id,
+                        Title = item.Title,
+                        Author = item.Author,
+                        Description = item.Description,
+                        Category = item.Category,
+                        Language = item.Language,
+                        TotalPages = item.TotalPages.HasValue ? item.TotalPages.Value : 0
+                    });
+                }
+            }
+
+
+            return books;
+            
         }
-        public BookModel searchbookbyid(int id)
+        public async Task<BookModel> searchbookbyid(int id)
         {
-            return bookModels().Where(x => x.Id == id).FirstOrDefault();
+            var data =await _db.Books.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (data != null) 
+            {
+                var books = new BookModel()
+                {
+                    Title = data.Title,
+                    Id = data.Id,
+                    Author = data.Author,
+                    Category = data.Category,
+                    Description = data.Description,
+                    Language = data.Language,
+                    TotalPages = data.TotalPages.HasValue ? data.TotalPages.Value : 0
+
+                };
+                return books;
+            }
+            else 
+            { 
+                return null; 
+            }
+
+           
         }
 
         public List<BookModel> Searchallbooks(string author , string title)
         {
             return bookModels().Where(x => x.Author == author || x.Title == title).ToList();
+        }
+
+        private readonly ApplicationDbContext _db;
+
+        public BookRepository(ApplicationDbContext db)
+        {
+            _db = db;
+        }
+
+        public async Task<int> AddNewBook(Book data)
+        {
+            var books = new Book()
+            {
+                Title = data.Title,
+                Author = data.Author,
+                Description = data.Description,
+                Category = data.Category,
+                Language = data.Language,
+                TotalPages = data.TotalPages.HasValue ? data.TotalPages.Value : 0
+
+            };
+              await  _db.Books.AddAsync(books);
+               await _db.SaveChangesAsync();
+            
+            return books.Id;
         }
     }
 }
